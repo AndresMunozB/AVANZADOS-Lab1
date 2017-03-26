@@ -18,6 +18,7 @@ int existsFile(char* filename) {
 	}
 	return 0;
 }
+
 /*
  * Funcion isIn
 */
@@ -30,6 +31,7 @@ int isIn(char string[],char caracter){
 	}
 	return 0;
 }
+
 /*
  * Funcion consecutivos
 */
@@ -43,6 +45,7 @@ int consecutivos(char* string){
 	}
 	return 0;
 }
+
 /*
  * Funcion esNumero
 */
@@ -52,6 +55,7 @@ int esNumero(char c){
 	}
 	return 0;
 }
+
 /*
  * Funcion esVocal
 */
@@ -61,6 +65,7 @@ int esVocal(char c){
 	}
 	return 0;
 }
+
 /*
  * Funcion verificarPalabraValida
 */
@@ -76,6 +81,7 @@ int verificarPalabraValida(char* palabra){
 	}
 	return 1;
 }
+
 /*
  * Funcion buscarCaracteres
 */
@@ -95,24 +101,18 @@ void buscarCaracteres(char* caracteres, char* nombreFile){
 		if(!isIn(caracteres,buffer)){
 			caracteres[contador]=buffer;
 			contador++;	
-			//printf("contador: %d",contador);
-			
 		}
-        //int largo = strlen(caracteres);
-	    //    printf("%s: %d\n",caracteres, largo);	
 	}
-	fclose(archivoEntrada);
-	//printf("Caracteres: %s\n", caracteres);
-	
-    
+	fclose(archivoEntrada);    
 }
+
 /*
  * Funcion generarCombinaciones
 */
 void generarCombinaciones(char* caracteres){
-     
-    FILE* archivoMedio;
-	archivoMedio = fopen("medio.txt","w");
+    
+    FILE* archivoSalida;
+	archivoSalida = fopen("salida.txt","w");
 	int cantidad = strlen(caracteres);
     char string[] = { '0', '0', '0', '0', '0','0', '0', '0','\n', '\0' };
     int i,j,k,l,m,o,p,q;
@@ -134,8 +134,9 @@ void generarCombinaciones(char* caracteres){
     								string[6]=caracteres[p];
     								string[7]=caracteres[q];
     								
-    								fputs(string,archivoMedio);
-   									//printf("%s",string );
+    								if (verificarPalabraValida(string)){
+										fputs(string,archivoSalida);
+									}
     								
 								}
 							}
@@ -145,32 +146,5 @@ void generarCombinaciones(char* caracteres){
 			}	
 		}
 	}
-	fclose(archivoMedio);
-	
-          
-}
-/*
- * Funcion validarPalabras
-*/
-void validarCombinaciones(){
-	FILE* archivoMedio;
-	archivoMedio = fopen("medio.txt","r");
-	FILE* archivoSalida;
-	archivoSalida = fopen("salida.txt","w");
-
-	char buffer[250];
-	memset(buffer,0,sizeof(buffer));
-	while (!feof(archivoMedio)){
-		fflush(stdin);
-		memset(buffer,0,sizeof(buffer));
-		fscanf(archivoMedio,"%s\n",buffer);
-		if (verificarPalabraValida(buffer)){
-			//printf("Contrasena: %s\n",buffer );
-			fputs(buffer,archivoSalida);
-			fputs("\n",archivoSalida);
-		}
-		
-	}
-	fclose(archivoMedio);
-	fclose(archivoSalida);
+	fclose(archivoSalida);   
 }
