@@ -33,13 +33,16 @@ int isIn(char string[],char caracter){
 }
 
 /*
- * Funcion consecutivos
+ * Funcion consecutive
 */
-int consecutivos(char* string){
+int consecutive(char* string){
 	int i;
 	for (i = 0; i < strlen(string)-2; ++i)
 	{
-		if (string[i]==string[i+1] && string[i+1]==string[i+2]){
+		if (isLetter(string[i]) && isLetter(string[i+1]) && isLetter(string[i+2])){
+			return 1;
+		}
+		if (isNumber(string[i]) && isNumber(string[i+1]) && isNumber(string[i+2])){
 			return 1;
 		}
 	}
@@ -47,19 +50,29 @@ int consecutivos(char* string){
 }
 
 /*
- * Funcion esNumero
+ * Funcion isLetter
 */
-int esNumero(char c){
-	if (c== '0' || c== '1' || c== '2' || c== '3' || c== '4' || c== '5' || c== '6' || c== '7' || c== '8' || c== '9' ){
+int isLetter(char caracter){
+	if (caracter>=97 && caracter<=122){
 		return 1;
 	}
 	return 0;
 }
 
 /*
- * Funcion esVocal
+ * Funcion isNumber
 */
-int esVocal(char c){
+int isNumber(char c){
+	if (c>= 48 && c<=57){
+		return 1;
+	}
+	return 0;
+}
+
+/*
+ * Funcion isVocal
+*/
+int isVocal(char c){
 	if (c=='a' || c=='e' || c=='i' || c=='o' || c=='u'){
 		return 1;
 	}
@@ -67,31 +80,31 @@ int esVocal(char c){
 }
 
 /*
- * Funcion verificarPalabraValida
+ * Funcion validWord
 */
-int verificarPalabraValida(char* palabra){
-	if(consecutivos(palabra)){
+int validWord(char* palabra){
+
+	if(consecutive(palabra)){
+
 		return 0;
 	}
-	if(esNumero(palabra[0]) && esNumero(palabra[strlen(palabra)])){
+	if(isNumber(palabra[0]) && isNumber(palabra[strlen(palabra)-1])){
 		return 0;
 	}
-	if (esVocal(palabra[0])){
+	if (isVocal(palabra[0])){
 		return 0;
 	}
 	return 1;
 }
 
 /*
- * Funcion buscarCaracteres
+ * Funcion searchCharacters
 */
-void buscarCaracteres(char* caracteres, char* nombreFile){
+void searchCharacters(char* caracteres, char* nombreFile){
 	
 	
     FILE* archivoEntrada;
 	archivoEntrada = fopen(nombreFile,"r");
-
-	//char cadena[LARGOLINE];
 	char buffer;
 	int contador=0;
 	while (!feof(archivoEntrada)){
@@ -107,14 +120,15 @@ void buscarCaracteres(char* caracteres, char* nombreFile){
 }
 
 /*
- * Funcion generarCombinaciones
+ * Funcion generateCombinations
+ * Aqui es donde se utiliza fuerza bruta.
 */
-void generarCombinaciones(char* caracteres){
+void generateCombinations(char* caracteres){
     
     FILE* archivoSalida;
 	archivoSalida = fopen("salida.txt","w");
 	int cantidad = strlen(caracteres);
-    char string[] = { '0', '0', '0', '0', '0','0', '0', '0','\n', '\0' };
+    char string[] = { '0', '0', '0', '0', '0','0', '0', '0', '\0' };
     int i,j,k,l,m,o,p,q;
     for (i=0;i<cantidad;i++){
 		for (j=0;j<cantidad;j++){
@@ -134,8 +148,9 @@ void generarCombinaciones(char* caracteres){
     								string[6]=caracteres[p];
     								string[7]=caracteres[q];
     								
-    								if (verificarPalabraValida(string)){
+    								if (validWord(string)){
 										fputs(string,archivoSalida);
+										fputs("\n",archivoSalida);
 									}
     								
 								}

@@ -29,9 +29,10 @@ int main(){
 			scanf("%s", nameFile);
 					
 			if (existsFile(nameFile)){
-				buscarCaracteres(caracteres,nameFile);
+				searchCharacters(caracteres,nameFile);
 				printf("Generando combinaciones...\n");
-				generarCombinaciones(caracteres);
+				//aqui se llama al algortimo de fuerza bruta
+				generateCombinations(caracteres);
 				printf("Combinaciones generadas.\n");
 				printf("Las palabras se encuentran en el archivo 'salida.txt'.\n\n");
 						
