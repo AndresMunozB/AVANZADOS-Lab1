@@ -110,13 +110,15 @@ void searchCharacters(char* caracteres, char* nombreFile){
 	while (!feof(archivoEntrada)){
 
 		fscanf(archivoEntrada,"%c\n",&buffer);
-
+		printf("%c\n",buffer );
 		if(!isIn(caracteres,buffer) && (isLetter(buffer) || isNumber(buffer)) ){
 			caracteres[contador]=buffer;
 			contador++;	
 		}
+		printf("%s\n", caracteres);
 	}
-	fclose(archivoEntrada);    
+	fclose(archivoEntrada);  
+
 }
 
 /*
@@ -130,6 +132,7 @@ void generateCombinations(char* caracteres){
 	int cantidad = strlen(caracteres);
     char string[] = { '0', '0', '0', '0', '0','0', '0', '0', '\0' };
     int i,j,k,l,m,o,p,q;
+    printf("%s\n", caracteres);
     for (i=0;i<cantidad;i++){
 		for (j=0;j<cantidad;j++){
     		for (k=0;k<cantidad;k++){
@@ -149,6 +152,7 @@ void generateCombinations(char* caracteres){
     								string[7]=caracteres[q];
     								
     								if (validWord(string)){
+    									//printf("%s\n",string );
 										fputs(string,archivoSalida);
 										fputs("\n",archivoSalida);
 									}

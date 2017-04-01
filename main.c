@@ -13,6 +13,7 @@ int main(){
 	char nameFile[250];
 	memset(caracteres,0,sizeof(caracteres));
 	memset(nameFile,0,sizeof(nameFile));
+	//printf("caracter: %s\n", caracteres);
 	char option[250];
 	do{
 		printf("         MENU\n");
@@ -23,7 +24,7 @@ int main(){
 		fflush(stdin);
 		scanf("%s",option);
 		if (!strcmp(option,"1")){
-			memset(nameFile,'0',255);
+			memset(nameFile,0,255);
 			//char stringBuffer[LARGOLINE];
 			printf("\nIngrese el nombre de un archivo: ");
 			scanf("%s", nameFile);
