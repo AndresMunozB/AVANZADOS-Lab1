@@ -28,15 +28,15 @@ int main(){
 			//char stringBuffer[LARGOLINE];
 			printf("\nIngrese el nombre de un archivo: ");
 			scanf("%s", nameFile);
-					
+
 			if (existsFile(nameFile)){
 				searchCharacters(caracteres,nameFile);
 				printf("Generando combinaciones...\n");
 				//aqui se llama al algortimo de fuerza bruta
 				generateCombinations(caracteres);
 				printf("Combinaciones generadas.\n");
-				printf("Las palabras se encuentran en el archivo 'salida.txt'.\n\n");
-						
+				printf("Las palabras se encuentran en el archivo 'salida.out'.\n\n");
+
 			}
 			else{
 				printf("El archivo ingresado no existe\n\n");
@@ -44,6 +44,7 @@ int main(){
 		}
 
 		}while(strcmp(option,"2"));
+		return 0;
 }
 
 
@@ -68,4 +69,4 @@ int main(){
 
 
 
-     
+
